@@ -2,7 +2,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import FirebaseProvider from "@/context/FirebaseContext";
-import { use } from "react";
+import { CartProvider } from "@/context/CartContext"; // ← ADICIONADO
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,7 +25,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <FirebaseProvider>
-          {children}
+          <CartProvider>   {/* ← ADICIONADO AQUI */}
+            {children}
+          </CartProvider>
         </FirebaseProvider>
       </body>
     </html>
