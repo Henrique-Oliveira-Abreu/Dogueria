@@ -243,68 +243,102 @@ useEffect(() => {
       </section>
 
       {/* Financeiro */}
-      <section className="space-y-6">
-        <h1 className="text-3xl font-bold mb-6 text-center">Financeiro</h1>
+<section className="space-y-6">
+  <h1 className="text-3xl font-bold mb-6 text-center">Financeiro</h1>
 
-        {/* FILTROS */}
-        <div className="flex gap-4 mb-4">
-          <div>
-            <label className="block mb-1 font-semibold">Dia:</label>
-            <input
-              type="date"
-              value={dataFiltro}
-              onChange={(e) => setDataFiltro(e.target.value)}
-              className="border rounded px-2 py-1"
-            />
-          </div>
+  {/* FILTROS */}
+  <div className="flex gap-4 mb-4">
+    <div>
+      <label className="block mb-1 font-semibold">Dia:</label>
+      <input
+        type="date"
+        value={dataFiltro}
+        onChange={(e) => setDataFiltro(e.target.value)}
+        className="border rounded px-2 py-1"
+      />
+    </div>
 
-          <div>
-            <label className="block mb-1 font-semibold">Semana</label>
-            <input
-              type="week"
-              value={semanaFiltro}
-              onChange={(e) => setSemanaFiltro(e.target.value)}
-              className="border rounded px-2 py-1"
-            />
-          </div>
+    <div>
+      <label className="block mb-1 font-semibold">Semana</label>
+      <input
+        type="week"
+        value={semanaFiltro}
+        onChange={(e) => setSemanaFiltro(e.target.value)}
+        className="border rounded px-2 py-1"
+      />
+    </div>
 
-          <div>
-            <label className="block mb-1 font-semibold">Mês </label>
-            <input
-              type="month"
-              value={mesFiltro}
-              onChange={(e) => setMesFiltro(e.target.value)}
-              className="border rounded px-2 py-1"
-            />
-          </div>
+    <div>
+      <label className="block mb-1 font-semibold">Mês</label>
+      <input
+        type="month"
+        value={mesFiltro}
+        onChange={(e) => setMesFiltro(e.target.value)}
+        className="border rounded px-2 py-1"
+      />
+    </div>
+  </div>
+
+  {loadingFinanceiro ? (
+    <p className="text-center text-lg">Carregando financeiro...</p>
+  ) : (
+    <>
+      {/* Cards Financeiros */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="bg-white p-6 rounded-2xl shadow-md">
+          <h2 className="font-bold mb-2">Hoje ({dataFiltro})</h2>
+          <p>Total de pedidos: {financeiro.totalPedidosDiario ?? 0}</p>
+          <p>
+            Faturamento: R${" "}
+            {Number(financeiro.faturamentoDiario ?? 0).toFixed(2)}
+          </p>
         </div>
 
-        {loadingFinanceiro ? (
-          <p className="text-center text-lg">Carregando financeiro...</p>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            <div className="bg-white p-6 rounded-2xl shadow-md">
-              <h2 className="font-bold mb-2">Hoje ({dataFiltro})</h2>
-              <p>Total de pedidos: {financeiro.totalPedidosDiario ?? 0}</p>
-              <p>Faturamento: R$ {Number(financeiro.faturamentoDiario ?? 0).toFixed(2)}</p>
-            </div>
+        <div className="bg-white p-6 rounded-2xl shadow-md">
+          <h2 className="font-bold mb-2">Esta Semana</h2>
+          <p>Total de pedidos: {financeiro.totalPedidosSemanal ?? 0}</p>
+          <p>
+            Faturamento: R${" "}
+            {Number(financeiro.faturamentoSemanal ?? 0).toFixed(2)}
+          </p>
+        </div>
 
-            <div className="bg-white p-6 rounded-2xl shadow-md">
-              <h2 className="font-bold mb-2">Esta Semana</h2>
-              <p>Total de pedidos: {financeiro.totalPedidosSemanal ?? 0}</p>
-              <p>Faturamento: R$ {Number(financeiro.faturamentoSemanal ?? 0).toFixed(2)}</p>
-            </div>
+        <div className="bg-white p-6 rounded-2xl shadow-md">
+          <h2 className="font-bold mb-2">Este Mês ({mesFiltro})</h2>
+          <p>Total de pedidos: {financeiro.totalPedidosMensal ?? 0}</p>
+          <p>
+            Faturamento: R${" "}
+            {Number(financeiro.faturamentoMensal ?? 0).toFixed(2)}
+          </p>
+        </div>
+      </div>
 
-            <div className="bg-white p-6 rounded-2xl shadow-md">
-              <h2 className="font-bold mb-2">Este Mês ({mesFiltro})</h2>
-              <p>Total de pedidos: {financeiro.totalPedidosMensal ?? 0}</p>
-              <p>Faturamento: R$ {Number(financeiro.faturamentoMensal ?? 0).toFixed(2)}</p>
-            </div>
+      {/* Indicadores */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+        <div className="bg-white p-6 rounded-2xl shadow-md text-center">
+          <h2 className="font-bold text-lg mb-2">🎯 Ticket Médio</h2>
+          <p className="text-3xl font-bold text-green-600">
+            R$ 30,00
+          </p>
+        </div>
 
-          </div>
-        )}
-      </section>
+        <div className="bg-white p-6 rounded-2xl shadow-md text-center">
+          <h2 className="font-bold text-lg mb-2">🏆 Lanche Mais Vendido</h2>
+          <p className="text-2xl font-bold text-blue-600">
+            X-BACON
+          </p>
+        </div>
+
+        <div className="bg-white p-6 rounded-2xl shadow-md text-center">
+          <h2 className="font-bold text-lg mb-2">📉 Lanche Menos Vendido</h2>
+          <p className="text-2xl font-bold text-red-600">
+            X-BURGUER
+          </p>
+        </div>
+      </div>
+    </>
+  )}
+</section>
 
       {/* Modal Cadastrar Produto */}
       {abrirModal && (

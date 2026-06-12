@@ -89,7 +89,7 @@ return (
 <div
   className="w-full text-white relative rounded-2xl overflow-hidden mb-6 shadow-lg bg-black"
   style={{
-    backgroundImage: `url(/imagens/produto1.jpeg)`,
+    backgroundImage: `url(/imagens/produto2.jpeg)`,
     backgroundSize: "contain",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
@@ -147,12 +147,12 @@ return (
     {/* LISTA DE PRODUTOS */}
     <div className="relative grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* BOTÃO ABRIR CARRINHO */}
-    <button
-      onClick={toggleCart}
-      className="absolute top-2 right-4 bg-red-600 text-white px-4 py-2 rounded-lg shadow hover:bg-red-700 z-50"
-    >
-      Carrinho ({cart.length})
-    </button>
+<button
+  onClick={toggleCart}
+  className="fixed bottom-6 right-6 bg-red-600 text-white px-4 py-3 rounded-lg shadow-lg hover:bg-red-700 z-50"
+>
+  Carrinho ({cart.length})
+</button>
 
       {produtosFiltrados.map((prod) => (
         <div
